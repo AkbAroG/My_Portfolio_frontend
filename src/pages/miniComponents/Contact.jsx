@@ -17,7 +17,7 @@ const Contact = () => {
 
     await axios
       .post(
-        "https://my-portfolio-rose-two-59.vercel.app/api/v1/skill/getall/api/v1/message/send",
+        "https://my-portfolio-rose-two-59.vercel.app/api/v1/message/send",
         { senderName, subject, message },
         {
           withCredentials: true,
