@@ -319,20 +319,48 @@ const Portfolio = () => {
             ))}
           </div>
 
-          <div className="mt-10 flex flex-col items-center gap-4">
-            <div className="flex justify-center items-center gap-6">
-              <button onClick={handlePrev} className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center transition hover:border-orange-400 hover:text-orange-400"><ChevronLeft /></button>
+          <div className="mt-10 flex flex-col items-center gap-6 relative z-20">
+            <div className="flex justify-center items-center gap-8">
+              <motion.button
+                type="button"
+                onClick={handlePrev}
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
+                className="w-14 h-14 rounded-full border-2 border-orange-500 bg-orange-500/10 flex items-center justify-center transition-all hover:bg-orange-500/20 hover:shadow-[0_0_20px_rgba(249,115,22,0.4)]"
+              >
+                <ChevronLeft size={28} className="text-orange-500" />
+              </motion.button>
+
               <div className="flex gap-2">
                 {filteredProjects.map((_,idx)=>(
-                  <button key={idx} onClick={()=>setActiveIndex(idx)} className={activeIndex===idx?'w-8 h-1.5 bg-orange-500 rounded-full':'w-2 h-2 bg-zinc-600 rounded-full'} />
+                  <motion.button
+                    key={idx}
+                    type="button"
+                    onClick={()=>setActiveIndex(idx)}
+                    whileHover={{ scale: 1.15 }}
+                    className={activeIndex===idx?'w-8 h-2 bg-orange-500 rounded-full shadow-[0_0_15px_rgba(249,115,22,0.6)]':'w-2 h-2 bg-zinc-600 rounded-full hover:bg-zinc-500'}
+                  />
                 ))}
               </div>
-              <button onClick={handleNext} className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center transition hover:border-orange-400 hover:text-orange-400"><ChevronRight /></button>
+
+              <motion.button
+                type="button"
+                onClick={handleNext}
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
+                className="w-14 h-14 rounded-full border-2 border-orange-500 bg-orange-500/10 flex items-center justify-center transition-all hover:bg-orange-500/20 hover:shadow-[0_0_20px_rgba(249,115,22,0.4)]"
+              >
+                <ChevronRight size={28} className="text-orange-500" />
+              </motion.button>
             </div>
             {filteredProjects.length > 1 && (
-              <p className="text-sm text-gray-300">
-                Next: <span className="text-white font-medium">{filteredProjects[(activeIndex + 1) % filteredProjects.length]?.title}</span>
-              </p>
+              <motion.p
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                className="text-sm text-gray-300"
+              >
+                Next: <span className="text-orange-400 font-semibold">{filteredProjects[(activeIndex + 1) % filteredProjects.length]?.title}</span>
+              </motion.p>
             )}
           </div>
         </>
