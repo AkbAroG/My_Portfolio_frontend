@@ -228,7 +228,7 @@ const Portfolio = () => {
   };
 
   return (
-    <section className="relative min-h-screen overflow-hidden bg-black text-white px-6 md:px-12 py-20">
+    <section className="relative min-h-screen overflow-hidden  text-white px-6 md:px-12 py-20">
       <div className="absolute inset-0 opacity-5" style={{backgroundImage:'linear-gradient(to right,#fff 1px,transparent 1px),linear-gradient(to bottom,#fff 1px,transparent 1px)',backgroundSize:'60px 60px'}} />
       <div className="absolute top-24 left-1/4 w-2 h-2 rounded-full bg-orange-500 shadow-[0_0_20px_#f97316]" />
       <div className="absolute top-1/3 right-1/4 w-2 h-2 rounded-full bg-orange-500 shadow-[0_0_20px_#f97316]" />
