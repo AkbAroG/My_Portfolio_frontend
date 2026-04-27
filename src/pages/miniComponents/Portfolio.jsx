@@ -218,13 +218,49 @@ const Portfolio = () => {
 
   const getCardStyle = (index) => {
     const len = filteredProjects.length;
+    if (len === 0) return { opacity: 0 };
+
+    const prevIndex = (activeIndex - 1 + len) % len;
+    const nextIndex = (activeIndex + 1) % len;
+
     if (index === activeIndex)
-      return { left: "50%", x: "-50%", scale: 1, opacity: 1, zIndex: 30 };
-    if (index === (activeIndex - 1 + len) % len)
-      return { left: "18%", x: "-50%", scale: 0.82, opacity: 0.25, zIndex: 20 };
-    if (index === (activeIndex + 1) % len)
-      return { left: "82%", x: "-50%", scale: 0.82, opacity: 0.25, zIndex: 20 };
-    return { left: "50%", x: "-50%", scale: 0.6, opacity: 0, zIndex: 10 };
+      return {
+        left: "50%",
+        x: "-50%",
+        scale: 1,
+        opacity: 1,
+        zIndex: 30,
+        y: 0,
+      };
+
+    if (index === prevIndex)
+      return {
+        left: "28%",
+        x: "-50%",
+        scale: 0.85,
+        opacity: 0.45,
+        zIndex: 20,
+        y: 10,
+      };
+
+    if (index === nextIndex)
+      return {
+        left: "72%",
+        x: "-50%",
+        scale: 0.85,
+        opacity: 0.45,
+        zIndex: 20,
+        y: 10,
+      };
+
+    return {
+      left: "50%",
+      x: "-50%",
+      scale: 0.6,
+      opacity: 0,
+      zIndex: 10,
+      y: 0,
+    };
   };
 
   return (
@@ -246,15 +282,22 @@ const Portfolio = () => {
         ))}
       </div>
 
-      {filteredProjects.length > 0 && (
+      {filteredProjects.length === 0 ? (
+        <div className="relative h-[420px] w-full max-w-[1100px] mx-auto rounded-[30px] border border-white/10 bg-zinc-950/70 flex items-center justify-center text-center px-6">
+          <div>
+            <p className="text-orange-500 uppercase tracking-[6px] mb-3">No projects found</p>
+            <h2 className="text-3xl font-bold text-white">Try another filter or come back later.</h2>
+          </div>
+        </div>
+      ) : (
         <>
           <div className="relative h-[520px] w-full max-w-[1500px] mx-auto">
             {filteredProjects.map((element,index)=>(
               <motion.div
                 key={element._id}
                 animate={getCardStyle(index)}
-                transition={{duration:0.6}}
-                className="absolute top-0 w-[300px] sm:w-[420px] md:w-[650px] lg:w-[820px] h-full rounded-[30px] overflow-hidden border border-white/10 bg-zinc-900 cursor-pointer"
+                transition={{ duration: 0.6, ease: "easeOut" }}
+                className="absolute top-0 w-[300px] sm:w-[360px] md:w-[520px] lg:w-[620px] h-full rounded-[30px] overflow-hidden border border-white/10 bg-zinc-900 shadow-2xl cursor-pointer"
                 onClick={()=>setActiveIndex(index)}
               >
                 <img src={element.projectBanner?.url} alt={element.title} className="w-full h-full object-cover" />
@@ -276,14 +319,21 @@ const Portfolio = () => {
             ))}
           </div>
 
-          <div className="mt-10 flex justify-center items-center gap-6">
-            <button onClick={handlePrev} className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center"><ChevronLeft /></button>
-            <div className="flex gap-2">
-              {filteredProjects.map((_,idx)=>(
-                <button key={idx} onClick={()=>setActiveIndex(idx)} className={activeIndex===idx?'w-8 h-1.5 bg-orange-500 rounded-full':'w-2 h-2 bg-zinc-600 rounded-full'} />
-              ))}
+          <div className="mt-10 flex flex-col items-center gap-4">
+            <div className="flex justify-center items-center gap-6">
+              <button onClick={handlePrev} className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center transition hover:border-orange-400 hover:text-orange-400"><ChevronLeft /></button>
+              <div className="flex gap-2">
+                {filteredProjects.map((_,idx)=>(
+                  <button key={idx} onClick={()=>setActiveIndex(idx)} className={activeIndex===idx?'w-8 h-1.5 bg-orange-500 rounded-full':'w-2 h-2 bg-zinc-600 rounded-full'} />
+                ))}
+              </div>
+              <button onClick={handleNext} className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center transition hover:border-orange-400 hover:text-orange-400"><ChevronRight /></button>
             </div>
-            <button onClick={handleNext} className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center"><ChevronRight /></button>
+            {filteredProjects.length > 1 && (
+              <p className="text-sm text-gray-300">
+                Next: <span className="text-white font-medium">{filteredProjects[(activeIndex + 1) % filteredProjects.length]?.title}</span>
+              </p>
+            )}
           </div>
         </>
       )}
