@@ -5,11 +5,11 @@ import {
   Instagram,
   Linkedin,
   Twitter,
-  ExternalLink,
+  
 } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Typewriter } from "react-simple-typewriter";
-import { Button } from "@/components/ui/button";
+
 import axios from "axios";
 import { motion } from "framer-motion";
 import pic from "../../../public/picofme (3).png";
@@ -131,28 +131,7 @@ const Hero = () => {
         </div>
 
         {/* BUTTONS */}
-        <div className="mt-8 flex gap-4 flex-wrap">
-          <a
-            href="https://github.com/AkbAroG"
-            target="_blank"
-            className=" rounded-full flex gap-2 items-center hover:scale-105 transition bg-white text-orange-400 px-11 py-2"
-            onMouseEnter={(e) => (e.target.style.color = "#ff8c00")}
-            onMouseLeave={(e) => (e.target.style.color = "#4a5568")}
-          >
-            <Github className="hover:scale-110 transition" />
-          </a>
-
-          <a
-            href={user?.resume?.url || "https://drive.google.com/file/d/1GG3_i3PyfylS9NPxlle9wwm4ukxr-xkg/view?usp=drive_link"}
-            target="_blank"
-            // rel="noreferrer"
-            // onClick={(e) => !user?.resume?.url && e.preventDefault()}
-          >
-            <Button className="rounded-full flex gap-2 items-center hover:scale-105 transition">
-              <ExternalLink /> Resume
-            </Button>
-          </a>
-        </div>
+       
       </motion.div>
 
       {/* RIGHT SIDE */}
