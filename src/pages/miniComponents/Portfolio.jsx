@@ -276,21 +276,47 @@ const Portfolio = () => {
 
       <div className="flex justify-center gap-3 mb-12 flex-wrap relative z-10">
         {filters.map((item) => (
-          <button key={item.name} onClick={() => {setFilter(item.name);setActiveIndex(0);}} className={`px-4 py-2 rounded-full border text-sm ${filter===item.name?'bg-orange-500 border-orange-500':'border-orange-400 text-orange-400'}`}>
-            {item.icon} {item.name}
-          </button>
+          <motion.button
+            key={item.name}
+            type="button"
+            onClick={() => {setFilter(item.name);setActiveIndex(0);}}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className={`px-6 py-3 rounded-full border-2 text-sm font-medium transition-all duration-300 flex items-center gap-2 ${
+              filter === item.name
+                ? 'bg-orange-500 border-orange-500 text-white shadow-[0_0_20px_rgba(249,115,22,0.5)]'
+                : 'border-orange-400/50 text-orange-400 hover:border-orange-400'
+            }`}
+          >
+            <span className="text-lg">{item.icon}</span>
+            {item.name}
+            {filter === item.name && <span className="ml-1 text-xs bg-orange-600 px-2 py-0.5 rounded-full">{filteredProjects.length}</span>}
+          </motion.button>
         ))}
       </div>
 
       {filteredProjects.length === 0 ? (
-        <div className="relative h-[420px] w-full max-w-[1100px] mx-auto rounded-[30px] border border-white/10 bg-zinc-950/70 flex items-center justify-center text-center px-6">
+        <motion.div
+          key="no-projects"
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -10 }}
+          className="relative h-[420px] w-full max-w-[1100px] mx-auto rounded-[30px] border border-orange-500/30 bg-gradient-to-br from-zinc-950 to-zinc-900/50 flex items-center justify-center text-center px-6 backdrop-blur-sm"
+        >
           <div>
-            <p className="text-orange-500 uppercase tracking-[6px] mb-3">No projects found</p>
-            <h2 className="text-3xl font-bold text-white">Try another filter or come back later.</h2>
+            <p className="text-orange-500 uppercase tracking-[6px] mb-3 text-sm font-semibold">No projects found</p>
+            <h2 className="text-3xl font-bold text-white mb-2">No {filter} Projects Yet</h2>
+            <p className="text-gray-400">Try selecting a different filter or check back soon for more projects.</p>
           </div>
-        </div>
+        </motion.div>
       ) : (
-        <>
+        <motion.div
+          key="projects-carousel"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.3 }}
+        >
           <div className="relative h-[520px] w-full max-w-[1500px] mx-auto">
             {filteredProjects.map((element,index)=>(
               <motion.div
@@ -363,7 +389,7 @@ const Portfolio = () => {
               </motion.p>
             )}
           </div>
-        </>
+        </motion.div>
       )}
     </section>
   );
