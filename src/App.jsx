@@ -7,7 +7,9 @@ import Footer from "./pages/miniComponents/Footer";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 // import { ModeToggle } from "./components/mode-toggle";
-import video from "../assets/video2.mp4";
+// import video from "../assets/video2.mp4";
+import video from "../assets/video.mp4";
+
 import { useRef, useEffect } from "react";
 
 function App() {
