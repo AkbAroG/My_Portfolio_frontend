@@ -26,7 +26,7 @@ function App() {
           loop
           muted
           playsInline
-          className="fixed top-0 left-0 w-full h-full object-cover -z-10 blur-sm opacity-80"
+          className="fixed top-0 left-0 w-full h-full object-cover -z-10 blur-lg opacity-100"
         >
           <source src={video} type="video/mp4" />
         </video>
