@@ -8,11 +8,20 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 // import { ModeToggle } from "./components/mode-toggle";
 import video from "../assets/video2.mp4";
+import { useRef, useEffect } from "react";
 
 function App() {
+  const videoRef = useRef(null);
+
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.playbackRate = 0.5;
+    }
+  }, []);
   return (
     
     <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme "><video
+          ref={videoRef}
           autoPlay
           loop
           muted
