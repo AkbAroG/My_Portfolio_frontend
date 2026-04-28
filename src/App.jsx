@@ -15,7 +15,7 @@ function App() {
 
   useEffect(() => {
     if (videoRef.current) {
-      videoRef.current.playbackRate = 0.25;
+      videoRef.current.playbackRate = 0.9;
     }
   }, []);
   return (
@@ -26,7 +26,7 @@ function App() {
           loop
           muted
           playsInline
-          className="fixed top-0 left-0 w-full h-full object-cover -z-10 blur-lg opacity-100"
+          className="fixed top-0 left-0 w-full h-full object-cover -z-10 blur-xl opacity-75"
         >
           <source src={video} type="video/mp4" />
         </video>
